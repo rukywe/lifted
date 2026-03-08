@@ -1,0 +1,1 @@
+DROP INDEX `bookings_advisor_start`;

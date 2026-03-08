@@ -1,9 +1,4 @@
-import {
-  sqliteTable,
-  text,
-  integer,
-  unique,
-} from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
 
 export const advisors = sqliteTable('advisors', {
   id: text('id').primaryKey(),
@@ -20,27 +15,23 @@ export const availabilityWindows = sqliteTable('availability_windows', {
   endTime: text('endTime').notNull(),
 });
 
-export const bookings = sqliteTable(
-  'bookings',
-  {
-    id: text('id').primaryKey(),
-    advisorId: text('advisorId')
-      .notNull()
-      .references(() => advisors.id),
-    candidateName: text('candidateName').notNull(),
-    visaType: text('visaType', { enum: ['A', 'B'] }).notNull(),
-    startTime: text('startTime').notNull(),
-    endTime: text('endTime').notNull(),
-    status: text('status', {
-      enum: ['held', 'confirmed', 'expired', 'cancelled'],
-    }).notNull(),
-    holdExpiresAt: text('holdExpiresAt'),
-    confirmedAt: text('confirmedAt'),
-    createdAt: integer('createdAt', { mode: 'timestamp' }).notNull(),
-    version: integer('version').default(1).notNull(),
-  },
-  (t) => [unique('bookings_advisor_start').on(t.advisorId, t.startTime)],
-);
+export const bookings = sqliteTable('bookings', {
+  id: text('id').primaryKey(),
+  advisorId: text('advisorId')
+    .notNull()
+    .references(() => advisors.id),
+  candidateName: text('candidateName').notNull(),
+  visaType: text('visaType', { enum: ['A', 'B'] }).notNull(),
+  startTime: text('startTime').notNull(),
+  endTime: text('endTime').notNull(),
+  status: text('status', {
+    enum: ['held', 'confirmed', 'expired', 'cancelled'],
+  }).notNull(),
+  holdExpiresAt: text('holdExpiresAt'),
+  confirmedAt: text('confirmedAt'),
+  createdAt: integer('createdAt', { mode: 'timestamp' }).notNull(),
+  version: integer('version').default(1).notNull(),
+});
 
 export const waitlist = sqliteTable('waitlist', {
   id: text('id').primaryKey(),
