@@ -97,11 +97,16 @@ function fetchWindows(
 function fetchActiveBookings(
   dbInstance: BetterSQLite3Database
 ): BookingRecord[] {
+  const now = new Date().toISOString();
   return dbInstance
     .select()
     .from(bookings)
     .where(or(eq(bookings.status, 'held'), eq(bookings.status, 'confirmed')))
-    .all();
+    .all()
+    .filter((b) => {
+      if (b.status === 'held' && b.holdExpiresAt && b.holdExpiresAt < now) return false;
+      return true;
+    });
 }
 
 function generateSlotsForWindow(

@@ -64,6 +64,7 @@ function hasConflict(
   startTime: string,
   endTime: string
 ): boolean {
+  const now = new Date().toISOString();
   const existing = dbInstance
     .select()
     .from(bookings)
@@ -73,7 +74,11 @@ function hasConflict(
         or(eq(bookings.status, 'held'), eq(bookings.status, 'confirmed'))
       )
     )
-    .all();
+    .all()
+    .filter((b) => {
+      if (b.status === 'held' && b.holdExpiresAt && b.holdExpiresAt < now) return false;
+      return true;
+    });
 
   return existing.some(
     (b) =>

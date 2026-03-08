@@ -2,6 +2,7 @@ import './db';
 import { createApp } from './app';
 import { env } from './config/env';
 import { logger } from './lib/logger';
+import { startExpireHoldsCron } from './jobs/expireHolds';
 
 const app = createApp();
 
@@ -13,6 +14,8 @@ const server = app.listen(env.PORT, () => {
   logger.info('API: POST /api/v1/bookings');
   logger.info('API: POST /api/v1/bookings/:id/confirm');
   logger.info('API: GET  /api/v1/bookings');
+
+  startExpireHoldsCron();
 });
 
 function gracefulShutdown(signal: string) {
