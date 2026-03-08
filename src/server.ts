@@ -9,6 +9,7 @@ const server = app.listen(env.PORT, () => {
   logger.info(`Server running on port ${env.PORT} [${env.NODE_ENV}]`);
   logger.info('Health: GET /health');
   logger.info('Health: GET /health/db');
+  logger.info('API: GET /api/v1/availability');
 });
 
 function gracefulShutdown(signal: string) {

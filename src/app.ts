@@ -5,6 +5,7 @@ import { applySecurity } from './middleware/security';
 import { errorHandler } from './middleware/errorHandler';
 import { logger } from './lib/logger';
 import { db } from './db';
+import apiRoutes from './routes';
 
 export function createApp() {
   const app = express();
@@ -27,6 +28,7 @@ export function createApp() {
     }
   });
 
+  app.use('/api/v1', apiRoutes);
   app.use('/api/v1', (_req, res) => {
     res.status(404).json({
       error: 'NOT_FOUND',
