@@ -1,0 +1,384 @@
+{
+  "info": {
+    "_postman_id": "06761d52-f997-4d26-be10-cce61a445b79",
+    "name": "Lifted Booking API",
+    "description": "Immigration Advisor Booking API — health, availability, bookings.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "12135578"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "GET Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Health DB",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health/db",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health",
+                "db"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Availability",
+      "item": [
+        {
+          "name": "GET Availability (all)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/availability",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "availability"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Availability (Type A slots)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/availability?visaType=A",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "availability"
+              ],
+              "query": [
+                {
+                  "key": "visaType",
+                  "value": "A"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Availability (Type B slots)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/availability?visaType=B",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "availability"
+              ],
+              "query": [
+                {
+                  "key": "visaType",
+                  "value": "B"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Availability (Sofia, 10 Mar)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/availability?advisorId=ia-001&date=2025-03-10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "availability"
+              ],
+              "query": [
+                {
+                  "key": "advisorId",
+                  "value": "ia-001"
+                },
+                {
+                  "key": "date",
+                  "value": "2025-03-10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Availability (Rajan, 10 Mar)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/availability?advisorId=ia-002&date=2025-03-10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "availability"
+              ],
+              "query": [
+                {
+                  "key": "advisorId",
+                  "value": "ia-002"
+                },
+                {
+                  "key": "date",
+                  "value": "2025-03-10"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "POST Create booking (Type A — Sofia)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{$guid}}",
+                "description": "Optional; reuse to get same response for duplicate request"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateName\": \"Alice Smith\",\n  \"visaType\": \"A\",\n  \"advisorId\": \"ia-001\",\n  \"startTime\": \"2025-03-10T09:00:00.000Z\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/bookings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bookings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Create booking (Type B — Rajan)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{$guid}}",
+                "description": "Optional; reuse to get same response for duplicate request"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"candidateName\": \"Bob Jones\",\n  \"visaType\": \"B\",\n  \"advisorId\": \"ia-002\",\n  \"startTime\": \"2025-03-10T09:33:00.000Z\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/bookings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bookings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Confirm booking",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/bookings/{{bookingId}}/confirm",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bookings",
+                "{{bookingId}}",
+                "confirm"
+              ]
+            },
+            "description": "Set collection variable 'bookingId' to the id returned from Create booking, or paste the id directly in the URL."
+          },
+          "response": []
+        },
+        {
+          "name": "GET Bookings (all)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/bookings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bookings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Bookings (held only)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/bookings?status=held",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bookings"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "held"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Bookings (confirmed only)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/bookings?status=confirmed",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bookings"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "confirmed"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Bookings (Sofia, 10 Mar)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/bookings?advisorId=ia-001&date=2025-03-10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "bookings"
+              ],
+              "query": [
+                {
+                  "key": "advisorId",
+                  "value": "ia-001"
+                },
+                {
+                  "key": "date",
+                  "value": "2025-03-10"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "bookingId",
+      "value": ""
+    }
+  ]
+}

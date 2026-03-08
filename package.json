@@ -4,7 +4,7 @@
   "description": "Immigration Advisor Booking API for Lifted",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --watch src --watch data --ext ts,json --exec \"tsx src/server.ts\"",
+    "dev": "(test -f .env || cp .env.example .env) && nodemon --watch src --watch data --ext ts,json --exec \"tsx src/server.ts\"",
     "start": "tsx src/server.ts",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
