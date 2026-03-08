@@ -1,12 +1,14 @@
-import { createApp } from './app.js';
-import { env } from './config/env.js';
-import { logger } from './lib/logger.js';
+import './db';
+import { createApp } from './app';
+import { env } from './config/env';
+import { logger } from './lib/logger';
 
 const app = createApp();
 
 const server = app.listen(env.PORT, () => {
   logger.info(`Server running on port ${env.PORT} [${env.NODE_ENV}]`);
   logger.info('Health: GET /health');
+  logger.info('Health: GET /health/db');
 });
 
 function gracefulShutdown(signal: string) {

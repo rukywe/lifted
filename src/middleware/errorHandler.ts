@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 import { ZodError } from 'zod';
-import { NotFoundError, BusinessRuleError, ConflictError } from '../lib/errors.js';
-import { logger } from '../lib/logger.js';
+import { NotFoundError, BusinessRuleError, ConflictError } from '../lib/errors';
+import { logger } from '../lib/logger';
 
 interface SqliteError extends Error {
   code?: string;

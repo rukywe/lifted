@@ -4,11 +4,12 @@
   "description": "Immigration Advisor Booking API for Lifted",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
+    "dev": "nodemon --watch src --watch data --ext ts,json --exec \"tsx src/server.ts\"",
     "start": "tsx src/server.ts",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
-    "db:reset": "rm -f bookings.db && tsx src/db/seed.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:reset": "rm -f bookings.db && echo 'Database cleared — will reseed on next start'",
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.12",
+    "nodemon": "^3.1.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/morgan": "^1.9.9",
