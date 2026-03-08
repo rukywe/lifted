@@ -1,0 +1,8 @@
+node_modules/
+dist/
+bookings.db
+bookings.db-wal
+bookings.db-shm
+.env
+*.log
+.DS_Store
